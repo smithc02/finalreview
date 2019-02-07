@@ -22,6 +22,10 @@ class Login extends Component {
 	};
 
 	render() {
+		console.log(this.props.user);
+		if (this.props.user.username) {
+			return <Redirect push to="/dashboard" />;
+		}
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
@@ -33,7 +37,7 @@ class Login extends Component {
 						onChange={this.handleChange}
 					/>
 					<input
-						value={this.state.username}
+						value={this.state.password}
 						type="password"
 						name="password"
 						placeholder=" password"

@@ -5,8 +5,8 @@ const massive = require('massive');
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const app = express();
-const authController = require('./authController');
-const { signup, login } = require('./authController');
+
+const { signup, login, get_user} = require('./authController');
 
 app.use(json());
 
@@ -29,6 +29,7 @@ massive(process.env.CONNECTION_STRING).then(db => {
 //endpoints
 app.post('/auth/signup', signup);
 app.post('/auth/login', login);
+app.get('/auth/user', get_user);
 
 app.listen(process.env.EXPRESS_PORT || 4000, () => {
 	console.log(`Listening on ${process.env.EXPRESS_PORT}`);

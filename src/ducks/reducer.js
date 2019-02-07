@@ -24,6 +24,12 @@ export function login(username, password) {
 		payload: axios.post('/auth/login', { username, password })
 	};
 }
+export function get_user() {
+	return {
+		type: GET_USER,
+		payload: axios.get('/auth/user')
+	};
+}
 
 //export default function of each action type/creators
 export default function reducer(state = initialState, action) {
@@ -35,7 +41,8 @@ export default function reducer(state = initialState, action) {
 			return { ...state, user: action.payload.data };
 		case `${LOGIN}_REJECTED`:
 			return { ...state, error: 'Username or password is incorrect ' };
-
+		case `${GET_USER}_FULFILLED`:
+			return { ...state, user: action.payload.data };
 		default:
 			return state;
 	}
